@@ -84,7 +84,6 @@ def motion_detection(URL):
 
 
         if (text == 'Movimento detectado') and ((time.time()- startTime) > time_grava ):
-            ()
             res = cv2.imwrite(os.path.join(IMG_PATH, str(time.time()) + ".jpg"), frame)
             first_frame = None
             startTime = time.time()
