@@ -4,6 +4,8 @@ import datetime
 import imutils
 import os
 
+IMG_PATH = "/home/engecorp/videostream/captured_img/"
+time_grava = 3.0 # grava um frame a cada x segundos
 
 def camera_config():
     #parametros de acesso da camera
@@ -20,14 +22,16 @@ def camera_config():
     print('Conectando com: ' + URL)
     return URL
 
+
+
 #salva um frame de referencia e compara com o atual
 def motion_detection(URL):
-    print('starting...')
     video_capture = cv2.VideoCapture(URL, cv2.CAP_FFMPEG)
-    #video_capture = cv2.VideoCapture(0) # value (0) selects the devices default camera
-    #time.sleep(2)
+    #video_capture = cv2.VideoCapture(0) 
+    
 
     first_frame = None
+    startTime = time.time()
 
     while True:
 
@@ -47,8 +51,6 @@ def motion_detection(URL):
         else:
             pass
 
-
-#        frame = imutils.resize(frame, width=500)
         frame_delta = cv2.absdiff(first_frame, greyscale_image)
         thresh = cv2.threshold(frame_delta, 100, 255, cv2.THRESH_BINARY)[1]
         dilate_image = cv2.dilate(thresh, None, iterations=2)
@@ -80,11 +82,19 @@ def motion_detection(URL):
         #cv2.imshow('Threshold(foreground mask)', dilate_image)
         #cv2.imshow('Frame_delta', frame_delta)
 
+
+        if (text == 'Movimento detectado') and ((time.time()- startTime) > time_grava ):
+            ()
+            res = cv2.imwrite(os.path.join(IMG_PATH, str(time.time()) + ".jpg"), frame)
+            first_frame = None
+            startTime = time.time()
+
+
+
         key = cv2.waitKey(1) & 0xFF 
         if key == ord('q'):
             cv2.destroyAllWindows()
             break
-
 
 
 if __name__=='__main__':
