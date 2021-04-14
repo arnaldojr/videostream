@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-# exemplos simples de como rodar stream de uma camera IP 
+# exemplo simples de como rodar stream de uma camera IP 
 
 import cv2
 import os
@@ -8,7 +8,7 @@ import os
 #parametros de acesso da camera
 USERNAME = 'admin'
 PASSWORD = '147258Jr'
-IP = '192.168.15.19'
+IP = '192.168.0.184'
 PORT = '554'
 
 #so roda se for ffmpeg

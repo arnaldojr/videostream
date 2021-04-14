@@ -11,7 +11,7 @@ def camera_config():
     #parametros de acesso da camera
     USERNAME = 'admin'
     PASSWORD = '147258Jr'
-    IP = '192.168.15.19'
+    IP = '192.168.0.184'
     PORT = '554'
 
     #so roda se for ffmpeg
@@ -79,12 +79,12 @@ def motion_detection(URL):
             (10, frame.shape[0] - 10), cv2.FONT_HERSHEY_SIMPLEX , 0.35, (0, 0, 255),1)
        
         cv2.imshow('Security Feed', frame)
-        #cv2.imshow('Threshold(foreground mask)', dilate_image)
-        #cv2.imshow('Frame_delta', frame_delta)
+        cv2.imshow('Threshold(foreground mask)', dilate_image)
+        cv2.imshow('Frame_delta', frame_delta)
 
 
         if (text == 'Movimento detectado') and ((time.time()- startTime) > time_grava ):
-            res = cv2.imwrite(os.path.join(IMG_PATH, str(time.time()) + ".jpg"), frame)
+           # res = cv2.imwrite(os.path.join(IMG_PATH, str(time.time()) + ".jpg"), frame)
             first_frame = None
             startTime = time.time()
 
